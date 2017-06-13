@@ -24,22 +24,16 @@ const dragended = ({simulation}) => {
 };
 
 const drawLink = ({context, d}) => {
-	context.beginPath();
 	context.moveTo(d.source.x, d.source.y);
 	context.lineTo(d.target.x, d.target.y);
-	context.shadowBlur = 40;
-	context.shadowColor = "#111";
-	context.strokeStyle = "#111";
-	context.lineWidth = 1;
-	context.stroke();
 };
 
 const drawNode = ({context, d}) => {
 	context.beginPath();
 	context.shadowBlur = 12;
 	context.shadowColor = d.color;
-	context.moveTo(d.x + 10, d.y);
-	context.arc(d.x, d.y, 10, 0, 2 * Math.PI);
+	context.moveTo(d.x + 3, d.y);
+	context.arc(d.x, d.y, 3, 0, 2 * Math.PI);
 	context.fillStyle = d.color;
 	context.fill();
 };
@@ -50,7 +44,7 @@ const colors = [
 ];
 
 const hook = (state$, actions) => {
-	var nodes = d3.range(15).map(index => ({
+	var nodes = d3.range(300).map(index => ({
 		index,
 		color: colors[Math.floor((Math.random() * 3) + 0)]
 	}));
@@ -87,7 +81,13 @@ const hook = (state$, actions) => {
 		context.save();
 		context.translate(width / 2, height / 2);
 
+		context.beginPath();
 		links.forEach(d => drawLink({context, d}));
+		context.shadowBlur = 40;
+		context.shadowColor = "#111";
+		context.strokeStyle = "#111";
+		context.lineWidth = 1;
+		context.stroke();
 
 		nodes.forEach(d => drawNode({context, d}));
 
