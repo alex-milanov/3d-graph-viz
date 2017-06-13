@@ -24,23 +24,36 @@ const dragended = ({simulation}) => {
 };
 
 const drawLink = ({context, d}) => {
+	context.beginPath();
 	context.moveTo(d.source.x, d.source.y);
 	context.lineTo(d.target.x, d.target.y);
+	context.shadowBlur = 40;
+	context.shadowColor = "#111";
+	context.strokeStyle = "#111";
+	context.lineWidth = 1;
+	context.stroke();
 };
 
 const drawNode = ({context, d}) => {
-	context.moveTo(d.x + 12, d.y);
-	context.arc(d.x, d.y, 12, 0, 2 * Math.PI);
+	context.beginPath();
+	context.shadowBlur = 12;
+	context.shadowColor = d.color;
+	context.moveTo(d.x + 10, d.y);
+	context.arc(d.x, d.y, 10, 0, 2 * Math.PI);
+	context.fillStyle = d.color;
+	context.fill();
 };
 
 // init d3
+const colors = [
+	'red', 'green', 'blue'
+];
 
 const hook = (state$, actions) => {
-	var nodes = d3.range(15).map(function(i) {
-		return {
-			index: i
-		};
-	});
+	var nodes = d3.range(15).map(index => ({
+		index,
+		color: colors[Math.floor((Math.random() * 3) + 0)]
+	}));
 
 	var links = d3.range(nodes.length - 1).map(function(i) {
 		return {
@@ -51,7 +64,7 @@ const hook = (state$, actions) => {
 
 	var simulation = d3.forceSimulation(nodes)
 		.force("charge", d3.forceManyBody())
-		.force("link", d3.forceLink(links).distance(40).strength(1))
+		.force("link", d3.forceLink(links).distance(70).strength(1))
 		.force("x", d3.forceX())
 		.force("y", d3.forceY())
 		.on("tick", ticked);
@@ -74,17 +87,9 @@ const hook = (state$, actions) => {
 		context.save();
 		context.translate(width / 2, height / 2);
 
-		context.beginPath();
 		links.forEach(d => drawLink({context, d}));
-		context.strokeStyle = "#aaa";
-		context.strokeWidth = 4;
-		context.stroke();
 
-		context.beginPath();
 		nodes.forEach(d => drawNode({context, d}));
-		context.fill();
-		context.strokeStyle = "#fff";
-		context.stroke();
 
 		context.restore();
 	}
