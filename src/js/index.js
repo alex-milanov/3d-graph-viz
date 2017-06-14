@@ -55,11 +55,14 @@ vdom.patchStream(ui$, '#ui');
 
 // refesh
 state$.distinctUntilChanged(state => state.needsRefresh)
-	.subscribe(state => {
-		console.log('refresh', state.needsRefresh);
-		if (!state.needsRefresh) setTimeout(() => viz.hook(state$, actions), 100);
-		else
-			actions.toggle('needsRefresh');
-	});
+	.filter(state => state.needsRefresh)
+	.subscribe(state =>
+			actions.toggle('needsRefresh')
+	);
+
+$.interval(100).map(() => document.querySelector('#viz'))
+	.distinctUntilChanged(canvas => canvas)
+	.filter(canvas => canvas)
+	.subscribe(canvas => viz.hook(state$, actions, canvas));
 
 state$.connect();

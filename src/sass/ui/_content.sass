@@ -1,0 +1,38 @@
+.content
+	position: absolute
+	top: 0px
+	left: 0px
+	width: 100%
+	height: 100%
+	> *
+		position: absolute
+	.left-pane
+		left: 0px
+		top: 0px
+		bottom: 0px
+		width: 200px
+		height: 100%
+		.add-user
+			input, button
+				width: 100%
+				height: 32px
+				line-height: 32px
+				border: 1px solid #aaa
+			button
+				+ui-button
+		.users
+			+reset
+			list-style: none
+			li
+				+header-height(28px)
+				display: block
+	.view3d
+		left: 200px
+		top: 0px
+		bottom: 0px
+		right: 0px
+		height: 100%
+		#viz
+			background: #000
+			width: 100%
+			height: 100%

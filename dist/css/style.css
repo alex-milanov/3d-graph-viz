@@ -2338,40 +2338,61 @@ html {
 body {
   font-family: "Open Sans"; }
 
-.counter {
-  height: 32px;
-  line-height: 32px; }
-  .counter > * {
-    float: left; }
-  .counter > span {
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 14px;
-    padding: 0px 10px; }
-  .counter button {
-    display: inline-block;
-    box-sizing: border-box;
-    height: 32px;
-    line-height: 12px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    background: #fafafa;
-    color: #333;
-    border: 0px;
-    transition: box-shadow 0.3s, background 0.3s;
-    box-shadow: 1px 1px 2px #ccc;
-    outline: none; }
-    .counter button:active {
-      padding: 11px 10px 9px 10px; }
-    .counter button:active {
-      outline: none; }
-    .counter button:hover {
-      box-shadow: 1px 1px 5px #aaa;
-      color: #000; }
+button {
+  cursor: pointer; }
 
-#view {
-  background: #000; }
+.content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%; }
+  .content > * {
+    position: absolute; }
+  .content .left-pane {
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 200px;
+    height: 100%; }
+    .content .left-pane .add-user input, .content .left-pane .add-user button {
+      width: 100%;
+      height: 32px;
+      line-height: 32px;
+      border: 1px solid #aaa; }
+    .content .left-pane .add-user button {
+      display: inline-block;
+      box-sizing: border-box;
+      height: 32px;
+      line-height: 12px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 14px; }
+      .content .left-pane .add-user button:active {
+        padding: 11px 10px 9px 10px; }
+    .content .left-pane .users {
+      margin: 0px;
+      padding: 0px;
+      display: inline-block;
+      box-sizing: border-box;
+      list-style: none; }
+      .content .left-pane .users li {
+        margin: 0px;
+        padding: 0px;
+        display: inline-block;
+        box-sizing: border-box;
+        height: 28px;
+        line-height: 28px;
+        display: block; }
+  .content .view3d {
+    left: 200px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    height: 100%; }
+    .content .view3d #viz {
+      background: #000;
+      width: 100%;
+      height: 100%; }
 
 /*# sourceMappingURL=style.css.map */

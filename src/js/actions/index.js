@@ -3,10 +3,13 @@
 // lib
 const {obj} = require('iblokz-data');
 
+const users = require('./users');
+
 // initial
 const initial = {
 	number: 0,
-	needsRefresh: false
+	needsRefresh: false,
+	users: []
 };
 
 // actions
@@ -15,6 +18,7 @@ const toggle = path => state => obj.patch(state, path, !obj.sub(state, path));
 
 module.exports = {
 	initial,
+	users,
 	set,
 	toggle
 };
